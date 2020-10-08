@@ -11,14 +11,14 @@ const parseArguments = (args: Array<string>): CalculatorInputs => {
     return {
       height: Number(args[2]),
       weight: Number(args[3])
-    }
+    };
   } else {
     throw new Error('Provided values were not numbers!');
   }
-}
+};
 
 
-const calculateBmi = (heightCms: number,weightKgs: number): string => {
+export const calculateBmi = (heightCms: number,weightKgs: number): string => {
     const bmi = weightKgs/(Math.pow(heightCms*0.01,2));
     
     const result = bmi < 15 ? "Very severely underweight"
@@ -31,11 +31,14 @@ const calculateBmi = (heightCms: number,weightKgs: number): string => {
       : "Obese Class III (Very severely obese)";
 
     return result;
-}
+};
 
 try{
-  const {height, weight} = parseArguments(process.argv);
-  console.log(calculateBmi(height, weight));
+  //To prevent this from running when the file calculateBmi is imported
+  if(process.argv[1].endsWith('bmiCalculator.ts')){ 
+    const {height, weight} = parseArguments(process.argv);
+    console.log(calculateBmi(height, weight)); 
+  } 
 }catch(e){
-  console.log('Error, something bad happened, message: ', e.message);
+  console.log('Error, something bad happened, message: ', (<Error>e).message);
 }

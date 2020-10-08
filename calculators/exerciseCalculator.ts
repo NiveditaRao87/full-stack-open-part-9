@@ -17,16 +17,16 @@ const parseArgs = (args: Array<string>): ExerciseHours => {
   if(args.length < 4) throw new Error('Not enough arguments');
   
   if(args.slice(2).find(arg => isNaN(Number(arg)))){
-      throw new Error('Provided values were not numbers!')
+      throw new Error('Provided values were not numbers!');
   } else {
       return {
         target: Number(args[2]),
         hours: args.slice(3).map(arg => Number(arg))
-      }
+      };
   }
-}
+};
 
-const calculateExercises = (target: number, hours: Array<number>): Result => {
+export const calculateExercises = (target: number, hours: Array<number>): Result => {
   
   const periodLength = hours.length;
   const average = hours.reduce((a,c) => a + c)/periodLength;
@@ -44,12 +44,17 @@ const calculateExercises = (target: number, hours: Array<number>): Result => {
     ratingDescription: ratingDescription[rating - 1],
     target,
     average
-  }
-}
+  };
+};
 
 try{
-  const {target, hours} = parseArgs(process.argv);
-  console.log(calculateExercises(target, hours));
+  console.log(process.argv);
+  
+  if(process.argv[1].endsWith('exerciseCalculator.ts')){ //To prevent this 
+    const {target, hours} = parseArgs(process.argv);
+    console.log(calculateExercises(target, hours));
+  }
+
 }catch(e){
-  console.log('Error, something bad happened, message: ', e.message);
+  console.log('Error, something bad happened, message: ', (<Error>e).message);
 }
