@@ -47,10 +47,9 @@ export const calculateExercises = (target: number, hours: Array<number>): Result
   };
 };
 
-try{
-  console.log(process.argv);
-  
-  if(process.argv[1].endsWith('exerciseCalculator.ts')){ //To prevent this 
+try{  
+  //To prevent this from running when the file calculateExercises is imported
+  if(process.argv[1].endsWith('exerciseCalculator.ts')){ 
     const {target, hours} = parseArgs(process.argv);
     console.log(calculateExercises(target, hours));
   }

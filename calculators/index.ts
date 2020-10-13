@@ -33,7 +33,8 @@ app.get('/bmi', (req,res) => {
 
 app.post('/exercise', (req,res) => {
   
-  const {target, daily_exercises} = req.body as ExerciseInput;  
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const {target, daily_exercises}: ExerciseInput = req.body;  
 
   if(!target || !daily_exercises || daily_exercises.length < 1){
     return res.json({error: "parameters missing"});
