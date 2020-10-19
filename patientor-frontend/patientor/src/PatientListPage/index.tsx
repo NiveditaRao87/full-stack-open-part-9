@@ -37,8 +37,8 @@ const PatientListPage: React.FC<{ history: History}> = ({ history }) => {
     }
   };
 
-  const showPatientDetails = async(patient: Patient) => {
-    history.push(`/patients/${patient.id}`)
+  const showPatientDetails = (patient: Patient) => {
+    history.push(`/patients/${patient.id}`);
   };
 
   return (
